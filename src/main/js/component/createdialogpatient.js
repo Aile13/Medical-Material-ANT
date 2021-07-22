@@ -1,4 +1,6 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
+
 
 export default class CreateDialog extends React.Component {
 
@@ -9,11 +11,11 @@ export default class CreateDialog extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const newEmployee = {};
+        const newPatient = {};
         this.props.attributes.forEach(attribute => {
-            newEmployee[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
+            newPatient[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
         });
-        this.props.onCreate(newEmployee);
+        this.props.onCreate(newPatient);
 
         // clear out the dialog's inputs
         this.props.attributes.forEach(attribute => {
@@ -33,17 +35,17 @@ export default class CreateDialog extends React.Component {
 
         return (
             <div>
-                <a href="#createEmployee">Create</a>
+                <a href="#createPatient">Crea paziente</a>
 
                 <div id="createEmployee" className="modalDialog">
                     <div>
                         <a href="#" title="Close" className="close">X</a>
 
-                        <h2>Create new employee</h2>
+                        <h2>Inserisci nuovo paziente</h2>
 
                         <form>
                             {inputs}
-                            <button onClick={this.handleSubmit}>Create</button>
+                            <button onClick={this.handleSubmit}>Inserisci Paziente</button>
                         </form>
                     </div>
                 </div>

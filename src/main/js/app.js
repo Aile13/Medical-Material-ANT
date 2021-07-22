@@ -3,6 +3,8 @@ const ReactDOM = require('react-dom');
 const client = require('./utility/client');
 const follow = require('./utility/follow');
 
+import when from "when";
+import CreateDialog from "./component/createdialogpatient";
 import PatientList from "./component/patientList";
 
 const root = '/api'
@@ -11,7 +13,12 @@ export default class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {patients: [], pageSize: 3};
+        this.state = {patients: [], attributes: [], pageSize: 2, links: {}};
+        this.updatePageSize = this.updatePageSize.bind(this);
+        this.onCreate = this.onCreate.bind(this);
+        this.onNavigate = this.onNavigate.bind(this);
+        this.onDelete = this.onDelete.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -28,14 +35,24 @@ export default class App extends React.Component {
                 headers: {'Accept': 'application/schema+json'}
             }).then(schema => {
                 this.schema = schema.entity;
+                this.links = patientCollection.entity._links;
                 return patientCollection;
             });
-        }).done(patientCollection => {
+        }).then(patientCollection => {
+            return patientCollection.entity._embedded.patients.map(patient =>
+                client({
+                    method: 'GET',
+                    path: patient._links.self.href
+                })
+            );
+        }).then(patientPromises => {
+            return when.all(patientPromises);
+        }).done(patients => {
             this.setState({
-                patients: patientCollection.entity._embedded.patients,
+                patients: patients,
                 attributes: Object.keys(this.schema.properties),
                 pageSize: pageSize,
-                links: patientCollection.entity._links
+                links: this.links
             });
         });
     }
@@ -60,16 +77,78 @@ export default class App extends React.Component {
         });
     }
 
+    onUpdate(patient, updatedPatient) {
+        client({
+            method: 'PUT',
+            path: patient.entity._links.self.href,
+            entity: updatedPatient,
+            headers: {
+                'Content-Type': 'application/json',
+                'If-Match': patient.headers.Etag
+            }
+        }).done(response => {
+            console.log(response)
+            this.loadFromServer(this.state.pageSize);
+        }, response => {
+            if (response.status.code === 412) {
+                alert('NON PERMESSO: Impossibile aggiornare paziente: ' +
+                    patient.entity._links.self.href +
+                    '. Errore aggiornamento paziente. ' +
+                    'Altre persone stanno modificando contemporaneamente a te questo paziente.');
+            }
+        });
+    }
+
+    updatePageSize(pageSize) {
+        if (pageSize !== this.state.pageSize) {
+            this.loadFromServer(pageSize);
+        }
+    }
+
+    onNavigate(navUri) {
+        client({
+            method: 'GET',
+            path: navUri
+        }).then(patientCollection => {
+            this.links = patientCollection.entity._links;
+
+            return patientCollection.entity._embedded.patients.map(patient =>
+                client({
+                    method: 'GET',
+                    path: patient._links.self.href
+                })
+            );
+        }).then(patientPromises => {
+            return when.all(patientPromises);
+        }).done(patients => {
+            this.setState({
+                patients: patients,
+                attributes: Object.keys(this.schema.properties),
+                pageSize: this.state.pageSize,
+                links: this.links
+            });
+        });
+    }
+
+    onDelete(patient) {
+        client({method: 'DELETE', path: patient.entity._links.self.href}).done(response => {
+            this.loadFromServer(this.state.pageSize);
+        });
+    }
+
     render() {
         return (
             <div>
-{/*
+                <h2>Gestione Materiale ANT</h2>
+                <br />
                 <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
-*/}
+                <br />
                 <PatientList patients={this.state.patients}
                              links={this.state.links}
                              pageSize={this.state.pageSize}
+                             attributes={this.state.attributes}
                              onNavigate={this.onNavigate}
+                             onUpdate={this.onUpdate}
                              onDelete={this.onDelete}
                              updatePageSize={this.updatePageSize}/>
             </div>

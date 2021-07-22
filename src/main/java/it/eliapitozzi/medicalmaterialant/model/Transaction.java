@@ -1,5 +1,6 @@
 package it.eliapitozzi.medicalmaterialant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -40,6 +38,10 @@ public class Transaction {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Patient patient;
+
+    @Version
+    @JsonIgnore
+    private Long version;
 
     public Transaction() {
     }

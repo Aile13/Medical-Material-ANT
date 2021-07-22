@@ -1,5 +1,6 @@
 package it.eliapitozzi.medicalmaterialant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 /**
  * @author Elia
@@ -29,6 +31,10 @@ public class Patient {
     private String address;
     private String place;
     private String telephoneNumber;
+
+    @Version
+    @JsonIgnore
+    private Long version;
 
     public Patient() {
     }
