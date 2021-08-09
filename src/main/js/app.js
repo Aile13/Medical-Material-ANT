@@ -4,8 +4,8 @@ const client = require('./utility/client');
 const follow = require('./utility/follow');
 
 import when from "when";
-import CreatePatientDialog from "./component/createpatientdialog";
-import PatientList from "./component/patientList";
+import CreatePatientDialog from "./component/patient/createpatientdialog";
+import PatientList from "./component/patient/patientList";
 
 const root = '/api'
 
