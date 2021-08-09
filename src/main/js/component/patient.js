@@ -1,6 +1,6 @@
 const React = require('react');
 
-import UpdateDialog from "./updatedialogpatient";
+import UpdatePatientDialog from "./updatepatientdialog";
 
 export default class Patient extends React.Component {
 
@@ -21,9 +21,9 @@ export default class Patient extends React.Component {
                 <td>{this.props.patient.entity.place}</td>
                 <td>{this.props.patient.entity.telephoneNumber}</td>
                 <td>
-                    <UpdateDialog patient={this.props.patient}
-                                  attributes={this.props.attributes}
-                                  onUpdate={this.props.onUpdate}/>
+                    <UpdatePatientDialog patient={this.props.patient}
+                                         attributes={this.props.attributes}
+                                         onUpdate={this.props.onUpdate}/>
                 </td>
                 <td>
                     <button onClick={this.handleDelete}>Elimina</button>

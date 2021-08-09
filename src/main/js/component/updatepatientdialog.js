@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-export default class UpdateDialog extends React.Component {
+export default class UpdatePatientDialog extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,13 +19,34 @@ export default class UpdateDialog extends React.Component {
     }
 
     render() {
-        const inputs = this.props.attributes.map(attribute =>
+        /*const inputs = this.props.attributes.map(attribute =>
             <p key={this.props.patient.entity[attribute]}>
                 <input type="text" placeholder={attribute}
                        defaultValue={this.props.patient.entity[attribute]}
                        ref={attribute} className="field"/>
             </p>
-        );
+
+        );*/
+
+        const inputs =
+            <div>
+                <p key="nominative">
+                    <input type="text" ref="nominative" placeholder="nominative"
+                           defaultValue={this.props.patient.entity["nominative"]} className="field"/>
+                </p>
+                <p key="address">
+                    <input type="text" ref="address" placeholder="address"
+                           defaultValue={this.props.patient.entity["address"]} className="field"/>
+                </p>
+                <p key="place">
+                    <input type="text" ref="place" placeholder="place"
+                           defaultValue={this.props.patient.entity["place"]} className="field"/>
+                </p>
+                <p key="telephoneNumber">
+                    <input type="text" ref="telephoneNumber" placeholder="telephoneNumber"
+                           defaultValue={this.props.patient.entity["telephoneNumber"]} className="field"/>
+                </p>
+            </div>
 
         const dialogId = "updateEmployee-" + this.props.patient.entity._links.self.href;
 
@@ -40,7 +61,7 @@ export default class UpdateDialog extends React.Component {
 
                         <form>
                             {inputs}
-                            <button onClick={this.handleSubmit}>Aggiorna</button>
+                            <button onClick={this.handleSubmit}>Modifica</button>
                         </form>
                     </div>
                 </div>

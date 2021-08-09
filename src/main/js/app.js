@@ -4,7 +4,7 @@ const client = require('./utility/client');
 const follow = require('./utility/follow');
 
 import when from "when";
-import CreateDialog from "./component/createdialogpatient";
+import CreatePatientDialog from "./component/createpatientdialog";
 import PatientList from "./component/patientList";
 
 const root = '/api'
@@ -141,7 +141,7 @@ export default class App extends React.Component {
             <div>
                 <h2>Gestione Materiale ANT</h2>
                 <br />
-                <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
+                <CreatePatientDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
                 <br />
                 <PatientList patients={this.state.patients}
                              links={this.state.links}

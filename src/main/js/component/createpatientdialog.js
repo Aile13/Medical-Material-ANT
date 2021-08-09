@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 
-export default class CreateDialog extends React.Component {
+export default class CreatePatientDialog extends React.Component {
 
     constructor(props) {
         super(props);
@@ -27,17 +27,27 @@ export default class CreateDialog extends React.Component {
     }
 
     render() {
-        const inputs = this.props.attributes.map(attribute =>
-            <p key={attribute}>
-                <input type="text" placeholder={attribute} ref={attribute} className="field"/>
-            </p>
-        );
+        const inputs =
+            <div>
+                <p key="nominative">
+                    <input type="text" ref="nominative" placeholder="nome e cognome" className="field"/>
+                </p>
+                <p key="address">
+                    <input type="text" ref="address" placeholder="indirizzo" className="field"/>
+                </p>
+                <p key="place">
+                    <input type="text" ref="place" placeholder="località" className="field"/>
+                </p>
+                <p key="telephoneNumber">
+                    <input type="text" ref="telephoneNumber" placeholder="numero di telefono" className="field"/>
+                </p>
+            </div>
 
         return (
             <div>
                 <a href="#createPatient">Crea paziente</a>
 
-                <div id="createEmployee" className="modalDialog">
+                <div id="createPatient" className="modalDialog">
                     <div>
                         <a href="#" title="Close" className="close">X</a>
 
