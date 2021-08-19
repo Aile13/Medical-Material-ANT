@@ -2,12 +2,19 @@ const axios = require('axios');
 
 
 export default class TransactionUtility {
-    constructor(patient) {
-        this.patient = patient
+    deleteTransaction(transaction) {
+        return axios.delete(transaction._links.self.href)
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
-    getTransactions() {
-        return axios.get('/api/transactions/search/findAllByPatientId?patient_id=2')
+    getTransactions(patient) {
+        return axios.get('/api/transactions/search/findAllByPatient', {
+            params: {
+                patient: patient
+            }
+        })
             .then(function (response) {
                 return response.data._embedded.transactions
             })

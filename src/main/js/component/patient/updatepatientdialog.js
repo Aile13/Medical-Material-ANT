@@ -43,12 +43,12 @@ export default class UpdatePatientDialog extends React.Component {
 
         return (
             <div key={this.props.patient.entity._links.self.href}>
-                <a href={"#" + dialogId}>Modifica</a>
+                <button><a href={"#" + dialogId}>Modifica</a></button>
                 <div id={dialogId} className="modalDialog">
                     <div>
                         <a href="#" title="Close" className="close">X</a>
 
-                        <h2>Modifica un paziente</h2>
+                        <h2>Modifica paziente</h2>
 
                         <form>
                             {inputs}

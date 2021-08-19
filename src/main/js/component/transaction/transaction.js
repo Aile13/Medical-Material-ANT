@@ -1,3 +1,5 @@
+import TransactionUtility from "./transactionutility";
+
 const React = require('react');
 
 export default class Transaction extends React.Component {
@@ -8,18 +10,28 @@ export default class Transaction extends React.Component {
     }
 
     handleDelete() {
-        this.props.onDelete(this.props.patient);
+        new TransactionUtility().deleteTransaction(this.props.transaction).then(r => {
+            this.props.onDeleteTransaction()
+        })
+    }
+
+    visualizzaData(data) {
+        if (data === null) {
+            return ""
+        } else {
+            return new Date(data).toLocaleDateString();
+        }
     }
 
     render() {
-        const deliveryDate = new Date(this.props.transaction.deliveryDate)
-        const withdrawalDate = new Date(this.props.transaction.withdrawalDate)
+        const deliveryDate = this.visualizzaData(this.props.transaction.deliveryDate)
+        const withdrawalDate = this.visualizzaData(this.props.transaction.withdrawalDate)
 
         return (
             <tr>
                 <td>{this.props.transaction.material}</td>
-                <td>{deliveryDate.toLocaleDateString()}</td>
-                <td>{withdrawalDate.toLocaleDateString()}</td>
+                <td>{deliveryDate}</td>
+                <td>{withdrawalDate}</td>
                 <td>{this.props.transaction.deliveryWaybill}</td>
                 <td>{this.props.transaction.withdrawalWaybill}</td>
 
