@@ -1,3 +1,5 @@
+import TransactionsList from "../transaction/transactionsList";
+
 const React = require('react');
 
 import UpdatePatientDialog from "./updatepatientdialog";
@@ -7,10 +9,20 @@ export default class Patient extends React.Component {
     constructor(props) {
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleInsertTransaction = this.handleInsertTransaction.bind(this);
+        this.handleViewTransactions = this.handleViewTransactions.bind(this);
     }
 
     handleDelete() {
         this.props.onDelete(this.props.patient);
+    }
+
+    handleViewTransactions() {
+        this.props.onViewTransactions(this.props.patient);
+    }
+
+    handleInsertTransaction() {
+        this.props.onInsertTransactionBy(this.props.patient);
     }
 
     render() {
@@ -27,6 +39,13 @@ export default class Patient extends React.Component {
                 </td>
                 <td>
                     <button onClick={this.handleDelete}>Elimina</button>
+                </td>
+                <td>
+                    <button onClick={this.handleInsertTransactionBy}>Inserisci Movimento</button>
+                </td>
+                <td>
+                    <TransactionsList patient={this.props.patient}
+                                        pageSize={42}/>
                 </td>
             </tr>
         )

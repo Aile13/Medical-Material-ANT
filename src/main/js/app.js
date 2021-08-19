@@ -19,6 +19,7 @@ export default class App extends React.Component {
         this.onNavigate = this.onNavigate.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
+        this.onViewTransactions = this.onViewTransactions.bind(this);
     }
 
     componentDidMount() {
@@ -93,8 +94,9 @@ export default class App extends React.Component {
             if (response.status.code === 412) {
                 alert('NON PERMESSO: Impossibile aggiornare paziente: ' +
                     patient.entity._links.self.href +
-                    '. Errore aggiornamento paziente. ' +
-                    'Altre persone stanno modificando contemporaneamente a te questo paziente.');
+                    '. Errore aggiornamento. ' +
+                    'Altre persone stanno modificando contemporaneamente a te questo paziente. \n' +
+                    "Per risolvere il problema ricaricare la pagina e ripetere l'operazione.");
             }
         });
     }
@@ -136,10 +138,18 @@ export default class App extends React.Component {
         });
     }
 
+    onInsertTransactionBy(patient) {
+
+    }
+
+    onViewTransactions(patient) {
+
+    }
+
     render() {
         return (
             <div>
-                <h2>Gestione Materiale ANT</h2>
+                <h1>Gestione Materiale ANT</h1>
                 <br />
                 <CreatePatientDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
                 <br />
@@ -150,6 +160,8 @@ export default class App extends React.Component {
                              onNavigate={this.onNavigate}
                              onUpdate={this.onUpdate}
                              onDelete={this.onDelete}
+                             onInsertTransactionBy={this.onInsertTransactionBy}
+                             onViewTransactions={this.onViewTransactions}
                              updatePageSize={this.updatePageSize}/>
             </div>
         )

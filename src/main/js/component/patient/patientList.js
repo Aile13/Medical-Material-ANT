@@ -27,7 +27,7 @@ export default class PatientList extends React.Component {
         }
     }
 
-    handleNavFirst(e){
+    handleNavFirst(e) {
         e.preventDefault();
         this.props.onNavigate(this.props.links.first.href);
     }
@@ -53,7 +53,10 @@ export default class PatientList extends React.Component {
                      patient={patient}
                      attributes={this.props.attributes}
                      onUpdate={this.props.onUpdate}
-                     onDelete={this.props.onDelete} />
+                     onDelete={this.props.onDelete}
+                     onInsertTransactionBy={this.props.onInsertTransactionBy}
+                     onViewTransactions={this.props.onViewTransactions}
+            />
         );
 
         const navLinks = [];
@@ -72,9 +75,10 @@ export default class PatientList extends React.Component {
 
         return (
             <div>
-                <p>Num pazienti per pagina: </p>
-                <input ref="pageSize" defaultValue={this.props.pageSize} onInput={this.handleInput}/>
-                <br /> <br />
+                <p>Numero pazienti per pagina: </p>
+                <input ref="pageSize" defaultValue={this.props.pageSize}
+                       onInput={this.handleInput}/>
+                <br/> <br/>
                 <table>
                     <tbody>
                     <tr>
@@ -82,9 +86,6 @@ export default class PatientList extends React.Component {
                         <th>Indirizzo</th>
                         <th>Luogo</th>
                         <th>Numero di telefono</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
                     </tr>
                     {patients}
                     </tbody>
