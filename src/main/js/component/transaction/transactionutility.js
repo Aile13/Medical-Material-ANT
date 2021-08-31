@@ -3,7 +3,7 @@ const axios = require('axios');
 
 export default class TransactionUtility {
 
-    editTransaction(transaction, patient) {
+    editTransaction(transaction) {
     }
 
     insertTransaction(transaction, patient) {

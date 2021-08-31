@@ -11,7 +11,7 @@ export default class Transaction extends React.Component {
     }
 
     handleEdit() {
-        new TransactionUtility().
+        new TransactionUtility().editTransaction(this.props.transaction)
     }
 
     handleDelete() {
