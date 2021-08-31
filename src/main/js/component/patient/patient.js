@@ -3,13 +3,13 @@ import TransactionsList from "../transaction/transactionsList";
 const React = require('react');
 
 import UpdatePatientDialog from "./updatepatientdialog";
+import CreateTransactiontDialog from "../transaction/createtransactiondiaolog";
 
 export default class Patient extends React.Component {
 
     constructor(props) {
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleInsertTransaction = this.handleInsertTransaction.bind(this);
         this.handleViewTransactions = this.handleViewTransactions.bind(this);
     }
 
@@ -21,9 +21,6 @@ export default class Patient extends React.Component {
         this.props.onViewTransactions(this.props.patient);
     }
 
-    handleInsertTransaction() {
-        this.props.onInsertTransactionBy(this.props.patient);
-    }
 
     render() {
         return (
@@ -41,7 +38,7 @@ export default class Patient extends React.Component {
                     <button onClick={this.handleDelete}>Elimina</button>
                 </td>
                 <td>
-                    <button onClick={this.handleInsertTransactionBy}>Inserisci Movimento</button>
+                    <CreateTransactiontDialog patient={this.props.patient}/>
                 </td>
                 <td>
                     <TransactionsList patient={this.props.patient}

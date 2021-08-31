@@ -7,6 +7,11 @@ export default class Transaction extends React.Component {
     constructor(props) {
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+    }
+
+    handleEdit() {
+        new TransactionUtility().
     }
 
     handleDelete() {
@@ -38,6 +43,11 @@ export default class Transaction extends React.Component {
                 <td>
                     <button onClick={this.handleDelete}>Elimina</button>
                 </td>
+
+                <td>
+                    <button onClick={this.handleEdit}>Modifica</button>
+                </td>
+
             </tr>
         )
     }

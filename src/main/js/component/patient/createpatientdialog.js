@@ -45,7 +45,9 @@ export default class CreatePatientDialog extends React.Component {
 
         return (
             <div>
-                <a href="#createPatient">Crea paziente</a>
+                <button>
+                    <a href="#createPatient">Crea paziente</a>
+                </button>
 
                 <div id="createPatient" className="modalDialog">
                     <div>
