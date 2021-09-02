@@ -11,10 +11,13 @@ export default class UpdatePatientDialog extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const updatedPatient = {};
+
         this.props.attributes.forEach(attribute => {
             updatedPatient[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
         });
+
         this.props.onUpdate(this.props.patient, updatedPatient);
+
         window.location = "#";
     }
 

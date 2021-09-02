@@ -14,6 +14,7 @@ export default class TransactionsList extends React.Component {
         }
 
         this.handleViewTransactions = this.handleViewTransactions.bind(this);
+        this.handleUpdateTransaction = this.handleUpdateTransaction.bind(this);
         this.handleDeleteTransaction = this.handleDeleteTransaction.bind(this);
     }
 
@@ -23,17 +24,22 @@ export default class TransactionsList extends React.Component {
 
     }
 
+    handleUpdateTransaction() {
+        this.handleViewTransactions()
+    }
+
     handleDeleteTransaction() {
         this.handleViewTransactions()
     }
 
     render() {
-        const dialogId = "viewTransations-" + this.props.patient.entity._links.self.href;
+        const dialogId = "viewTransactions-" + this.props.patient.entity._links.self.href;
         const transactions = this.state.transactions.map((transaction, i) =>
             <Transaction
-                key={"viewTransations-" + i + "-" + this.props.patient.entity._links.self.href}
+                key={"viewTransactions-" + i + "-" + this.props.patient.entity._links.self.href}
                 patient={this.props.patient.entity._links.self.href}
                 transaction={transaction}
+                onUpdateTransaction={this.handleUpdateTransaction}
                 onDeleteTransaction={this.handleDeleteTransaction}
             />
         )
@@ -62,7 +68,11 @@ export default class TransactionsList extends React.Component {
                                     <th>Bolla di consegna</th>
                                     <th>Bolla di ritiro</th>
                                 </tr>
-                                {transactions}
+                                {
+                                    transactions.length === 0 ?
+                                    <tr><td><em>Non ci sono ancora movimenti.</em></td></tr> :
+                                    transactions
+                                }
                                 </tbody>
                             </table>
                         </div>

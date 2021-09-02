@@ -1,4 +1,5 @@
 import TransactionUtility from "./transactionutility";
+import UpdateTransactionDialog from "./updatetransactiondialog";
 
 const React = require('react');
 
@@ -7,11 +8,6 @@ export default class Transaction extends React.Component {
     constructor(props) {
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
-    }
-
-    handleEdit() {
-        new TransactionUtility().editTransaction(this.props.transaction)
     }
 
     handleDelete() {
@@ -45,7 +41,9 @@ export default class Transaction extends React.Component {
                 </td>
 
                 <td>
-                    <button onClick={this.handleEdit}>Modifica</button>
+                    <UpdateTransactionDialog transaction={this.props.transaction}
+                                             onUpdateTransaction={this.props.onUpdateTransaction}
+                    />
                 </td>
 
             </tr>

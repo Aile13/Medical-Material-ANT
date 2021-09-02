@@ -16,28 +16,20 @@ export default class CreateTransactiontDialog extends React.Component {
 
         const newTransaction = {}
 
-        console.log(this.props.patient.entity._links.self.href)
-
         newTransaction['deliveryWaybill'] = ReactDOM.findDOMNode(this.refs['deliveryWaybill']).value.trim();
         newTransaction['withdrawalWaybill'] = ReactDOM.findDOMNode(this.refs['withdrawalWaybill']).value.trim();
         newTransaction['deliveryDate'] = ReactDOM.findDOMNode(this.refs['deliveryDate']).value.trim();
         newTransaction['withdrawalDate'] = ReactDOM.findDOMNode(this.refs['withdrawalDate']).value.trim();
-        newTransaction['material'] = 'COMODA' //ReactDOM.findDOMNode(this.refs['material']).value.trim();
-        /*newTransaction['patient'] = {
-            'href': this.props.patient.entity._links.self.href
-        }*/
-        console.log(newTransaction)
+        newTransaction['material'] = ReactDOM.findDOMNode(this.refs['material']).value.trim();
 
         new TransactionUtility()
             .insertTransaction(newTransaction, this.props.patient)
             .then(r => {
-
                 // clear out the dialog's inputs
                 ReactDOM.findDOMNode(this.refs['deliveryWaybill']).value = '';
                 ReactDOM.findDOMNode(this.refs['withdrawalWaybill']).value = '';
                 ReactDOM.findDOMNode(this.refs['deliveryDate']).value = '';
                 ReactDOM.findDOMNode(this.refs['withdrawalDate']).value = '';
-
 
                 // Navigate away from the dialog to hide it.
                 window.location = "#";
@@ -47,15 +39,43 @@ export default class CreateTransactiontDialog extends React.Component {
     render() {
         const inputs =
             <div>
-                <p key="material">
-                    <input type="text" ref="material" placeholder="materiale" className="field"/>
+                <p>
+                    <label htmlFor="material-select">Seleziona materiale:</label> <br/>
+                    <select ref="material" className="field"
+                            name="material" key="material" defaultValue="COMODA">
+                        <option value="LETTINO">Lettino</option>
+                        <option value="LETTO_ELETTRICO">Letto elettrico</option>
+                        <option value="MATERASSINO">Materassino</option>
+                        <option value="COMODA">Comoda</option>
+                        <option value="PIANTANA">Piantana</option>
+                        <option value="CARROZZINA_A_ROTELLE">Carrozzina a rotelle</option>
+                        <option value="CIAMBELLA">Ciambella</option>
+                        <option value="DEAMBULATORE">Deambulatore</option>
+                        <option value="SOLLEVATORE_ELETTRICO">Sollevatore elettrico</option>
+                        <option value="ALZACOPERTA">Alzacoperta</option>
+                        <option value="ALZAPERSONE_DA_PAVIMENTO">Alzapersone da pavimento</option>
+                        <option value="CAPRETTA">Capretta</option>
+                        <option value="BASTONE">Bastone</option>
+                        <option value="ALZAWATER">Alzawater</option>
+                        <option value="SEGGIOLINO_DA_VASCA">Seggiolino da vasca</option>
+                        <option value="PADELLA">Padella</option>
+                        <option value="CUSCINO_IN_SILICONE">Cuscino in silicone</option>
+                        <option value="ALZAWATER_DA_APPOGGIO">Alzawater da appoggio</option>
+                        <option value="PAPPAGALLO">Pappagallo</option>
+                        <option value="ASPIRATORE">Aspiratore</option>
+                    </select>
                 </p>
+
                 <p key="deliveryDate">
-                    <input type="text" ref="deliveryDate" placeholder="data di consegna" className="field"/>
+                    <label htmlFor="deliveryDate-select">Seleziona data di consegna:</label> <br/>
+                    <input type="date" ref="deliveryDate" className="field"/>
                 </p>
+
                 <p key="withdrawalDate">
-                    <input type="text" ref="withdrawalDate" placeholder="data di ritiro" className="field"/>
+                    <label htmlFor="withdrawalDate-select">Seleziona data di ritiro:</label> <br/>
+                    <input type="date" ref="withdrawalDate" className="field"/>
                 </p>
+
                 <p key="deliveryWaybill">
                     <input type="text" ref="deliveryWaybill" placeholder="bolla di consegna" className="field"/>
                 </p>
@@ -64,7 +84,7 @@ export default class CreateTransactiontDialog extends React.Component {
                 </p>
             </div>
 
-        const dialogId = 'createTransaction-' + this.props.patient.entity._links.self.href
+        const dialogId = 'createTransactionForPatient-' + this.props.patient.entity._links.self.href
 
         return (
             <div key={"insertTransactions-" + this.props.patient.entity._links.self.href}>
