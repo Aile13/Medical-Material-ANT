@@ -4,7 +4,8 @@ const axios = require('axios');
 export default class TransactionUtility {
 
     editTransaction(transaction) {
-        return axios.put(transaction._links.self.href,
+        return axios.put(
+            transaction._links.self.href,
             transaction
         ).catch(function (error) {
             console.log(error);
