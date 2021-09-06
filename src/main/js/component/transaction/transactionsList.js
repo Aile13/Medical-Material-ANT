@@ -19,6 +19,7 @@ export default class TransactionsList extends React.Component {
     }
 
     handleViewTransactions() {
+        console.log(this.props.patient.entity._links.self.href)
         new TransactionUtility().getTransactions(this.props.patient.entity._links.self.href)
             .then(transactions => this.setState({transactions: transactions}))
 
