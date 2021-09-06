@@ -19,7 +19,6 @@ export default class App extends React.Component {
         this.onNavigate = this.onNavigate.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
-        this.onViewTransactions = this.onViewTransactions.bind(this);
     }
 
     componentDidMount() {
@@ -136,14 +135,6 @@ export default class App extends React.Component {
         client({method: 'DELETE', path: patient.entity._links.self.href}).done(response => {
             this.loadFromServer(this.state.pageSize);
         });
-    }
-
-    onInsertTransactionBy(patient) {
-
-    }
-
-    onViewTransactions(patient) {
-
     }
 
     render() {
