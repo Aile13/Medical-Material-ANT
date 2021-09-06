@@ -44,6 +44,7 @@ export default class TransactionUtility {
                 return response.data._embedded.transactions
             })
             .catch(function (error) {
+                console.log(patient)
                 console.log(error);
             })
 
