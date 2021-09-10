@@ -8,5 +8,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * @author Elia
  */
 public interface PatientRepository extends PagingAndSortingRepository<Patient, Long> {
-
 }

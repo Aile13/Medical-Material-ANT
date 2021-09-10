@@ -9,13 +9,20 @@ export default class UpdateTransactionDialog extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.openDialog = this.openDialog.bind(this);
+        this.closeDialog = this.closeDialog.bind(this);
+
         this.state = {
-            dialogId : this.props.transaction._links.self.href
+            dialogId: this.props.transaction._links.self.href
         }
+
     }
 
     openDialog() {
         document.getElementById('edit-trans-dialog-' + this.state.dialogId).showModal()
+    }
+
+    closeDialog() {
+        document.getElementById('edit-trans-dialog-' + this.state.dialogId).close()
     }
 
 
@@ -31,7 +38,7 @@ export default class UpdateTransactionDialog extends React.Component {
 
         new TransactionUtility().editTransaction(updatedTransaction).then(r => {
             this.props.onUpdateTransaction();
-            document.getElementById('edit-trans-dialog-'+this.state.dialogId).close()
+            document.getElementById('edit-trans-dialog-' + this.state.dialogId).close()
         })
     }
 
@@ -105,6 +112,16 @@ export default class UpdateTransactionDialog extends React.Component {
         return (
             <div id={this.state.dialogId}>
                 <dialog id={"edit-trans-dialog-" + this.state.dialogId}>
+
+
+                    {/*<a href="#" title="Close" className="close" onClick={this.closeDialog}>X</a>*/}
+                    <a id={"exitBtn" + this.state.dialogId}
+                            title="exitBtn" className="close"
+                            onClick={this.closeDialog}
+                    >X
+                    </a>
+
+
                     <h2>Modifica movimento</h2>
                     <hr/>
                     <form method="dialog">
@@ -114,8 +131,6 @@ export default class UpdateTransactionDialog extends React.Component {
                             <button id={"confirmBtn" + this.state.dialogId} onClick={this.handleSubmit} value="default">
                                 Modifica
                             </button>
-                            <p></p>
-                            <button value="cancel">Esci</button>
                         </menu>
                     </form>
                 </dialog>
