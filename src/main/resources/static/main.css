@@ -1,6 +1,6 @@
 body {
     padding-left: 4%;
-    font-size: 22px;
+    font-size: large;
 }
 
 h1 {
@@ -8,12 +8,12 @@ h1 {
 }
 
 input.field {
-    font-size: 22px;
+    font-size: large;
     width: 90%;
 }
 
 select {
-    font-size: 22px;
+    font-size: large;
 }
 
 table {
@@ -22,11 +22,11 @@ table {
 
 button {
     background-color: lightgreen;
-    font-size: 22px;
+    font-size: large;
 }
 
 a {
-    font-size: 22px;
+    font-size: large;
 }
 
 td, th {
