@@ -33,6 +33,7 @@ td, th {
     border: 2px solid #004444;
     padding: 0.5rem;
     text-align: left;
+    font-size: large;
 }
 
 /*Classes for creating dialogs*/
