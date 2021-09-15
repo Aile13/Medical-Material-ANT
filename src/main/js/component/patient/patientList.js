@@ -78,7 +78,7 @@ export default class PatientList extends React.Component {
                 <p>Numero pazienti per pagina: </p>
                 <input ref="pageSize" defaultValue={this.props.pageSize}
                        onInput={this.handleInput}/>
-                <br/> <br/>
+                <br/> <br/> <br/>
                 <table>
                     <tbody>
                     <tr>
@@ -90,6 +90,7 @@ export default class PatientList extends React.Component {
                     {patients}
                     </tbody>
                 </table>
+                <br/>
                 <div>
                     {navLinks}
                 </div>

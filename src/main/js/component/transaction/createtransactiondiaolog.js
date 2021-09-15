@@ -97,7 +97,7 @@ export default class CreateTransactiontDialog extends React.Component {
                         <a href="#" title="Close" className="close">X</a>
 
                         <div>
-                            <h3>Inserisci movimento per {this.props.patient.entity.nominative}</h3>
+                            <h3>Nuovo movimento per {this.props.patient.entity.nominative}</h3>
 
                             <form>
                                 {inputs}

@@ -114,9 +114,8 @@ export default class UpdateTransactionDialog extends React.Component {
                 <dialog id={"edit-trans-dialog-" + this.state.dialogId}>
 
 
-                    {/*<a href="#" title="Close" className="close" onClick={this.closeDialog}>X</a>*/}
                     <a id={"exitBtn" + this.state.dialogId}
-                            title="exitBtn" className="close"
+                            title="exitBtn" className="closeDialog"
                             onClick={this.closeDialog}
                     >X
                     </a>
