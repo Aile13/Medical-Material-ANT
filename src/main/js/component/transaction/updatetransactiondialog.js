@@ -99,11 +99,13 @@ export default class UpdateTransactionDialog extends React.Component {
 
                 <p key="deliveryWaybill">
                     <label htmlFor="deliveryWaybill-select">Bolla di consegna:</label>
+                    <br/>
                     <input type="text" ref="deliveryWaybill" className="field"
                            defaultValue={this.props.transaction.deliveryWaybill}/>
                 </p>
                 <p key="withdrawalWaybill">
                     <label htmlFor="withdrawalWaybill-select">Bolla di ritiro:</label>
+                    <br/>
                     <input type="text" ref="withdrawalWaybill" className="field"
                            defaultValue={this.props.transaction.withdrawalWaybill}/>
                 </p>

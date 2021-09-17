@@ -51,7 +51,7 @@ export default class UpdatePatientDialog extends React.Component {
                     <div>
                         <a href="#" title="Close" className="close">X</a>
 
-                        <h2>Modifica paziente</h2>
+                        <h2>Modifica info paziente</h2>
 
                         <form>
                             {inputs}
